@@ -1,7 +1,7 @@
 from datetime import timedelta
 
-from main import cw_submissions, parse_date, module_deadline
-
+from main import parse_date, module_deadline
+import mc_submit
 
 class CW_submission:
     def __init__(self, student_id,fullname, module_name, submission_date):
@@ -11,10 +11,11 @@ class CW_submission:
         self.submission_date = submission_date
 
 def submit():
-    student_id = input("Enter Student ID: ")
+    student_id_str = input("Enter Student ID: ")
 
-    if not student_id.isnumeric():
+    if not student_id_str.isnumeric():
         return None
+    student_id = int(student_id_str)
     #get full name
     fullname = input("Enter Full Name: ")
     #get module name and validate
@@ -62,15 +63,24 @@ def full_mark():
 
 #function to handle submissions within one day
 def within_24hours(cw_submission):
-    print(check_valid_reason())
+    if check_valid_reason():
+        mc_submit.check(cw_submission)
+    else:
+        print("Minus 10 marks from overall mark but not below 40")
 
 #function to handle cases within 5 days
 def within_5days(cw_submission):
-    print(check_valid_reason())
+    if check_valid_reason():
+        mc_submit.check(cw_submission)
+    else:
+        print("Mark: 0")
 
 #function to handle submissions after 5 days
 def after_5days(cw_submission):
-    print(check_valid_reason())
+    if check_valid_reason():
+        mc_submit.check(cw_submission)
+    else:
+        print("Mark: 0")
 
 def check_valid_reason():
     while True:

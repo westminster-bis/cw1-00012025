@@ -2,6 +2,9 @@ from datetime import datetime
 
 #function to convert string to date type
 import cw_submission
+import mc_submit
+
+
 def parse_date(str):
     return datetime.strptime(str, '%d.%m.%Y')
 
@@ -11,7 +14,12 @@ def new_two_lines():
     print("")
     print("____________________________")
 
+#holds all cw submissions
 cw_submissions = []
+
+#holds all mc submissions
+mc_submissions = []
+
 # dictionary that holds modules and deadlines
 module_deadline = {
     'CSF': parse_date("01.12.2021"),
@@ -52,7 +60,7 @@ if __name__ == '__main__':
                     break
             new_two_lines()
         elif menu_item == 3:
-            print("Submit MC")
+            mc_submit.submit(None)
             new_two_lines()
         elif menu_item == 4:
             print("View My MCs")
