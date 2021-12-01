@@ -40,10 +40,16 @@ if __name__ == '__main__':
                 print(module+": "+str(module_deadline.get(module)))
             new_two_lines()
         elif menu_item == 2:
-            if not cw_submission.submit():
-                print("Wrong Input")
-            else:
-                print("Successfully submitted")
+            while True:
+                new_submission = cw_submission.submit()
+                if new_submission is None:
+                    print("Wrong Input")
+                else:
+                    print("Successfully submitted")
+                    new_two_lines()
+                    cw_submissions.append(new_submission)
+                    cw_submission.check(new_submission)
+                    break
             new_two_lines()
         elif menu_item == 3:
             print("Submit MC")
