@@ -56,18 +56,29 @@ def check(cw_submission):
         #On time -> Yes
         full_mark()
 
-#function for printinh full mark
+#function for printing full mark
 def full_mark():
-    print("Yur score is full mark of your assignment. No penalty")
+    print("Your score is full mark of your assignment. No penalty")
 
 #function to handle submissions within one day
-def within_24hours(CW_submission):
-    print("Within 24 Hours")
+def within_24hours(cw_submission):
+    print(check_valid_reason())
 
 #function to handle cases within 5 days
-def within_5days(CW_submission):
-    print("Within 24 Hours")
+def within_5days(cw_submission):
+    print(check_valid_reason())
 
 #function to handle submissions after 5 days
-def after_5days(CW_submission):
-    print("Within 24 Hours")
+def after_5days(cw_submission):
+    print(check_valid_reason())
+
+def check_valid_reason():
+    while True:
+        print("Is there a valid reason?")
+        answer = input("Yes/No\n")
+        if answer.upper() == "YES":
+            return True
+        elif answer.upper() == "NO":
+            return False
+        else:
+            print("Wrong Input. Type Yes or No!")
