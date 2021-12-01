@@ -16,12 +16,15 @@ def submit():
     if not student_id_str.isnumeric():
         return None
     student_id = int(student_id_str)
+
     #get full name
     fullname = input("Enter Full Name: ")
+
     #get module name and validate
     module_name = input("Enter Module Name (CSF, IMOB, WT, ISDS): ")
     if not module_name.upper() in module_deadline.keys():
         return None
+
     #get submission date and validate
     str_date = input("Enter the date you are submitting the coursework."
                      "\n(dd.mm.YYYY): ")
@@ -32,6 +35,7 @@ def submit():
     except:
         print("Enter in this format ===> (dd.mm.YYYY)")
         return None
+
     #append to the list of submissions
     new_submission = CW_submission(student_id, fullname, module_name, sub_date)
     return new_submission
@@ -53,6 +57,7 @@ def check(cw_submission):
         else:
             #Within 5 days -> No
             after_5days(cw_submission)
+
     elif deadline >= submission_date:
         #On time -> Yes
         full_mark()
@@ -61,27 +66,46 @@ def check(cw_submission):
 def full_mark():
     print("Your score is full mark of your assignment. No penalty")
 
+#fucntion to subtract 10
+def minus_10marks():
+    print("Minus 10 marks from overall mark but not below 40")
+
+#function to make mark 0
+def mark_zero():
+    print("Mark: 0")
+
 #function to handle submissions within one day
 def within_24hours(cw_submission):
     if check_valid_reason():
-        mc_submit.check(cw_submission)
+        mc_success = mc_submit.check(cw_submission)
+        if mc_success:
+            full_mark()
+        else:
+            minus_10marks()
     else:
-        print("Minus 10 marks from overall mark but not below 40")
+        minus_10marks()
 
 #function to handle cases within 5 days
 def within_5days(cw_submission):
     if check_valid_reason():
-        mc_submit.check(cw_submission)
+        mc_success = mc_submit.check(cw_submission)
+        if mc_success:
+            full_mark()
+        else:
+            mark_zero()
     else:
-        print("Mark: 0")
+        mark_zero()
 
 #function to handle submissions after 5 days
 def after_5days(cw_submission):
     if check_valid_reason():
-        mc_submit.check(cw_submission)
+        mc_success = mc_submit.check(cw_submission)
+        if mc_success:
+            print("Deferral Reassessment")
     else:
-        print("Mark: 0")
+        mark_zero()
 
+#to check valid reason
 def check_valid_reason():
     while True:
         print("Is there a valid reason?")

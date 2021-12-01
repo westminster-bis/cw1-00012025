@@ -4,7 +4,6 @@ from datetime import datetime
 import cw_submission
 import mc_submit
 
-
 def parse_date(str):
     return datetime.strptime(str, '%d.%m.%Y')
 
@@ -63,7 +62,11 @@ if __name__ == '__main__':
             mc_submit.submit(None)
             new_two_lines()
         elif menu_item == 4:
-            print("View My MCs")
+            if mc_submissions is None:
+                print("No MCs Found")
+            else:
+                for mc in mc_submissions:
+                    print(mc.__str__)
             new_two_lines()
         elif menu_item == 5:
             break
