@@ -49,7 +49,7 @@ def submit(cw_submission):
         except:
             print("Enter in this format ===> (dd.mm.YYYY)")
 
-    new_mc = MC_submission(student_id, module_name, reason, start_date, end_date)
+    new_mc = MC_submission(student_id, module_name.upper(), reason, start_date, end_date)
     print("MC Successfully Submitted")
 
     main.mc_submissions.append(new_mc)
